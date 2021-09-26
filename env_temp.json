@@ -1,0 +1,10 @@
+{
+    "bot": {
+        "id": "BOT_ID",
+        "discord_bot_token" : "TOKEN"
+    },
+
+    "webhook": {
+        "webhook_url": "URL"
+    }
+}
