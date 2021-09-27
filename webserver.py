@@ -2,17 +2,26 @@ from flask import Flask, render_template, request, jsonify
 from flask.helpers import make_response
 from flask_pymongo import PyMongo
 from werkzeug.utils import redirect
-
 from pysteamsignin.steamsignin import SteamSignIn
+from datetime import datetime
 
 import json
 import requests
 import discord_oauth
 import webhook
+import hashlib
+import db_website
 
 from werkzeug.wrappers import response
-app = Flask(__name__, static_folder='static')
+
+
+#TODO remove /discord /steam and only have /link 
 env = json.load(open("env.json"))
+
+app = Flask(__name__, static_folder='static')
+app.config["MONGO_URI"] = env["db"]["url"]
+mongo = PyMongo(app)
+
 
 @app.route('/')
 def home():
@@ -55,6 +64,9 @@ def steam():
         return render_template("views/steam.html", steam_url="/steam/auth")
 
 
+@app.route('/link/<session>')
+def recover_link(session):
+    return
 
 # gör så att man hamnar på link sidan.
 # FUNKTIONER
@@ -81,11 +93,14 @@ async def link():
         resp.delete_cookie("discord_username")
         resp.delete_cookie("steam_id")
 
-        resp.set_cookie("session", )
+        tmp_session = hashlib.md5(str(str(steam_id)+str(discord_id)+str(datetime.now().strftime('%Y-%m-%d %H:%M'))).encode("UTF-8")).hexdigest()
+        resp.set_cookie("session", tmp_session)
 
         # TODO add a "add to database" function
 
-        await webhook.new_user_added(discord_id, discord_username, steam_id)
+        if db_website.add_link_to_db(mongo, tmp_session, discord_id, steam_id, discord_username):
+            await webhook.new_user_added(discord_id, discord_username, steam_id)
+        
         return resp
 
 
