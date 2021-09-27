@@ -25,7 +25,7 @@ def discord():
         token = discord_oauth.get_access_token(code)["access_token"]
         user = discord_oauth.get_user(token)
         
-        resp = make_response(redirect("/steam"))
+        resp = make_response(redirect("/link"))
         resp.set_cookie("discord_id", value=user["id"])
         resp.set_cookie("discord_username", value=user["username"]) 
 
@@ -55,15 +55,38 @@ def steam():
         return render_template("views/steam.html", steam_url="/steam/auth")
 
 
+
+# gör så att man hamnar på link sidan.
+# FUNKTIONER
+# - är steam och discord länkat, visa det
+# - är de inte länkade ta användare till en sida för att länka sina konton
 @app.route('/link')
 async def link():
     steam_id = request.cookies.get("steam_id")
     discord_id = request.cookies.get("discord_id")
     discord_username = request.cookies.get("discord_username")
+    session = request.cookies.get("session")
 
+    print(steam_id)
 
-    await webhook.new_user_added(discord_id, discord_username, steam_id)
-    return redirect("/")
+    if discord_id == None:
+        return make_response(redirect("/discord"))
+    elif steam_id == None:
+        return make_response(redirect("/steam"))
+    elif session != None:
+        return "poof"
+    else:
+        resp = make_response(render_template("views/link.html", discord_id=discord_id, steam_id=steam_id))
+        resp.delete_cookie("discord_id")
+        resp.delete_cookie("discord_username")
+        resp.delete_cookie("steam_id")
+
+        resp.set_cookie("session", )
+
+        # TODO add a "add to database" function
+
+        await webhook.new_user_added(discord_id, discord_username, steam_id)
+        return resp
 
 
 
