@@ -15,10 +15,10 @@ intents.members = True
 STEAM_COMMUNITY_URL = "https://steamcommunity.com/profiles/"
 
 
-def embed(discord_username, discord_id, steam_id, prefix):
+def embed(discord_username, discord_id, steam_id, prefix, action, color):
 
     embed = discord.Embed(
-        title=f"{prefix}! {discord_username} successfully verified their account!")
+        title=f"{prefix}!", description=f"{discord_username} successfully {action} their account!", color=color)
     embed.add_field(name="Discord ID", value=discord_id)
     embed.add_field(name="Discord Username", value=discord_username)
     embed.add_field(name="Discord Mention", value=f"<@{discord_id}>")
@@ -33,15 +33,15 @@ def embed(discord_username, discord_id, steam_id, prefix):
 async def new_user_added(discord_id, discord_username, steam_id):
 
     webhook = Webhook.from_url(
-        env["webhook"]["webhook_url"], adapter=RequestsWebhookAdapter())
+        env["app"]["app-webhook-url"], adapter=RequestsWebhookAdapter())
 
     webhook.send(embed=embed(discord_username, discord_id,
-                 steam_id, "Linked"), username=env["name"]+"-hook")
+                 steam_id, "Linked", "verified", 0x00ff00), username=env["app"]["app-name"]+"-hook")
 
 
 async def unlink_msg(discord_id, discord_username, steam_id):
     webhook = Webhook.from_url(
-        env["webhook"]["webhook_url"], adapter=RequestsWebhookAdapter())
+        env["app"]["app-webhook-url"], adapter=RequestsWebhookAdapter())
 
     webhook.send(embed=embed(discord_username, discord_id,
-                 steam_id, "Unlinked"), username=env["name"]+"-hook")
+                 steam_id, "Unlinked", "unlinked", 0xff0000), username=env["app"]["app-name"]+"-hook")

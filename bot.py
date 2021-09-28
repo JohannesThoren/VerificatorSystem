@@ -1,3 +1,5 @@
+import re
+from discord import member
 from pymongo import MongoClient
 from discord.ext import commands
 
@@ -8,8 +10,8 @@ import db_bot
 
 client = discord.Client()
 env = json.load(open("env.json"))
-bot = commands.Bot(command_prefix=env["bot"]["prefix"])
-mongo = MongoClient(env["db"]["url"])[env["name"]]
+bot = commands.Bot(command_prefix=env["app"]["app-bot-prefix"])
+mongo = MongoClient(env["database"]["database-url"])[env["app"]["app-name"]]
 
 
 def link_embed(link):
@@ -54,8 +56,32 @@ async def get_link_by_steam_id(ctx, arg):
 for guild in client.guilds:
     print(guild.name)
 
-@client.event
-async def on_ready():
-    print("bot is ready")
 
-bot.run(env["bot"]["discord_bot_token"])
+@client.event
+async def on_message(msg):
+    embeds = msg.embeds
+    embed_dict = ""
+    do_reaction =  env["app"]["app-react-on-webhook"]
+    
+
+    if msg.author.name == env["app"]["app-name"]+"-hook":
+        for embed in embeds:
+            embed_dict = embed.to_dict()
+
+        role = discord.utils.get(msg.guild.roles, name=env["app"]["app-role-name"])
+        user = await msg.guild.fetch_member(int(embed_dict["fields"][0]["value"]))
+        if embed_dict["title"] == "Linked!":
+            await user.add_roles(role)
+            
+
+        elif embed_dict["title"] == "Unlinked!":
+            await user.remove_roles(role)
+            
+
+        if do_reaction:
+            await msg.add_reaction("✅")
+            
+
+
+client.run(env["app"]["app-token"])
+bot.run(env["app"]["app-token"])
