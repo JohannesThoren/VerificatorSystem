@@ -25,7 +25,6 @@ def remove_link_from_db(mongo, discord_id, steam_id):
 def fetch_ids_by_session(mongo, session):
     db_link = mongo.db.links
     link = db_link.find_one({"session": session})
-    print(link)
     if link:
         return link
     else:

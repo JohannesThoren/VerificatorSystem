@@ -75,6 +75,10 @@ def home():
     return render_template('index.html')
 
 
+@app.route('/branding')
+def branding():
+    return json.load(open("branding.json"))
+
 @app.route('/steam/auth')
 def steam_auth():
     hostname = env["webserver"]["webserver-uri"]
@@ -169,5 +173,11 @@ async def add_user_and_render():
     return resp
 
 if __name__ == "__main__":
-    app.run(debug=True, host=env["webserver"]["webserver-host"],
-            port=env["webserver"]["webserver-port"])
+    devmode = env["webserver"]["webserver-devmode"]
+
+    if devmode:
+        app.run(debug=True ,host=env["webserver"]["webserver-host"], port=env["webserver"]["webserver-port"])
+   
+    else:
+        from waitress import serve
+        serve(app, host=env["webserver"]["webserver-host"], port=env["webserver"]["webserver-port"])

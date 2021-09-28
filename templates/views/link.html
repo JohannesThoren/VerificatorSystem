@@ -1,57 +1,66 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
 
-    <link rel="stylesheet" href="/static/style/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
 
-    <script src="/static/src/gray_btns.js" defer></script>
-  </head>
-  <body>
-    <div class="content">
-      <h1 class="title">Link Discord Account</h1>
-      <p id="discord_info">
-        To link your Discord account you need to sign in, press the button
-        below.
-      </p>
-      <div class="button_group">
-        <a id="discord_link_btn" href="{{discord_url}}" class="button button_discord"
-          >Sign in Discord<i class="fab fa-discord"></i
-        ></a>
-      </div>
+  <link rel="stylesheet" href="/static/style/style.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+
+  <script src="/static/src/gray_btns.js" defer></script>
+  <script src="/static/src/branding.js" defer></script>
+</head>
+
+<body>
+  <div id="branding" class="content">
+    <div id="baranding-header">
+      <h1 id="branding-title" class="title"></h1>
+      <img id="branding-icon" src="" alt="">
     </div>
+    <p id="branding-info">
 
-    <div class="content">
-      <h1 class="title">Link Steam Account</h1>
-      <p id="steam_info">
-        You also have to sign in to steam, please press the button below to sign
-        in.
-      </p>
+    </p>
 
-      <div class="button_group">
-        <a id="steam_link_btn" href="{{steam_url}}" class="button button_steam"
-          >Sign in Steam<i class="fab fa-steam"></i
-        ></a>
-      </div>
+  </div>
+
+  <div class="content">
+    <h1 class="title">Link Discord Account</h1>
+    <p id="discord_info">
+      To link your Discord account you need to sign in, press the button
+      below.
+    </p>
+    <div class="button_group">
+      <a id="discord_link_btn" href="{{discord_url}}" class="button button_discord">Sign in Discord<i
+          class="fab fa-discord"></i></a>
     </div>
+  </div>
 
-    <div class="content">
-      <h1 class="title">Your account link</h1>
-      <p>When you have linked your accounts, you are able to unlink them at any time.</p>
-      <div class="center">Discord id <span class="ok_txt">{{discord_id}}</span></div>
-      <div class="center">Steam id <span class="ok_txt">{{steam_id}}</span></div>
+  <div class="content">
+    <h1 class="title">Link Steam Account</h1>
+    <p id="steam_info">
+      You also have to sign in to steam, please press the button below to sign
+      in.
+    </p>
 
-      <div class="button_group">
-        <a id="unlink"" href="{{unlink_url}}" class="button button_warning"
-          >Unlink Accounts<i class="fas fa-unlink"></i></a
-        >
-      </div>
+    <div class="button_group">
+      <a id="steam_link_btn" href="{{steam_url}}" class="button button_steam">Sign in Steam<i
+          class="fab fa-steam"></i></a>
     </div>
-  </body>
+  </div>
+
+  <div class="content">
+    <h1 class="title">Your account link</h1>
+    <p>When you have linked your accounts, you are able to unlink them at any time.</p>
+    <div class="center">Discord id <span class="ok_txt">{{discord_id}}</span></div>
+    <div class="center">Steam id <span class="ok_txt">{{steam_id}}</span></div>
+
+    <div class="button_group">
+      <a id="unlink"" href=" {{unlink_url}}" class="button button_warning">Unlink Accounts<i
+          class="fas fa-unlink"></i></a>
+    </div>
+  </div>
+</body>
+
 </html>

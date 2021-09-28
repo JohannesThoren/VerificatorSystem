@@ -41,6 +41,20 @@ body {
   background-color: var(--bg1);
 }
 
+img {
+  max-width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 100%;
+}
+
+#baranding-header {
+  margin: 10px;
+  display: grid;
+  grid-template-columns: 1.5fr 0.5fr;
+  align-items: center;
+}
+
 .ok_txt {
   color: var(--acc1);
 }
@@ -74,6 +88,7 @@ body {
   text-decoration: none;
   border-radius: var(--border-radius);
   background-color: var(--bg2);
+  margin: 10px;
 }
 
 .button:hover {
@@ -84,7 +99,7 @@ body {
 }
 
 .button_gray {
-  color: var(--bg2)
+  color: var(--bg2);
 }
 
 .button_gray:hover {
@@ -140,7 +155,7 @@ body {
 }
 
 .content {
-  margin-top: 20px;
+  margin: 20px;
   padding: 5px;
   border-radius: var(--border-radius);
   background-color: var(--bg2);
