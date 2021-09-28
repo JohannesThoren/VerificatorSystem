@@ -1,0 +1,23 @@
+{
+    "app": {
+        "app-name": "",
+        "app-role-name": "",
+        "app-id": "",
+        "app-token": "",
+        "app-secret": "",
+        "app-bot-prefix": "!",
+        "app-webhook-url": "",
+        "app-oauth-url": "",
+        "app-scope": "",
+        "app-react-on-webhook": false
+    },
+    "webserver": {
+        "webserver-port": 8000,
+        "webserver-host": "",
+        "webserver-uri": "",
+        "webserver-devmode": false
+    },
+    "database": {
+        "database-url": ""
+    }
+}
