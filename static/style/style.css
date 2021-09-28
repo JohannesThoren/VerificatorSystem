@@ -29,10 +29,8 @@
   --acc1: #44bb44;
   --acc2: #4444ee;
   --acc3: #ee4444;
-
   --steam-color: #468ff5;
   --discord-color: #7289da;
-
   --border-radius: 3px;
 }
 
@@ -43,9 +41,13 @@ body {
   background-color: var(--bg1);
 }
 
-.ok_txt {color: var(--acc1);}
-.warning_txt {color: var(--acc3);}
+.ok_txt {
+  color: var(--acc1);
+}
 
+.warning_txt {
+  color: var(--acc3);
+}
 
 .title {
   text-align: center;
@@ -109,16 +111,20 @@ body {
   background-color: var(--acc3);
   border: 2px solid var(--acc3);
 }
+
 .button_discord {
   color: var(--discord-color);
 }
+
 .button_discord:hover {
   background-color: var(--discord-color);
   border: 2px solid var(--discord-color);
 }
+
 .button_steam {
   color: var(--steam-color);
 }
+
 .button_steam:hover {
   background-color: var(--steam-color);
   border: 2px solid var(--steam-color);
@@ -135,12 +141,13 @@ body {
 
 .content {
   margin-top: 20px;
-  padding: 10px;
+  padding: 5px;
   border-radius: var(--border-radius);
   background-color: var(--bg2);
   width: 40%;
   margin-left: auto;
   margin-right: auto;
+  min-height: 180px;
 }
 
 .center {
@@ -148,6 +155,10 @@ body {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+}
+
+#unlink {
+  visibility: hidden;
 }
 
 @media screen and (max-width: 1200px) {

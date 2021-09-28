@@ -25,16 +25,18 @@ const steam_btn = document.getElementById("steam_link_btn")
 const discord_btn = document.getElementById("discord_link_btn")
 const steam_info = document.getElementById("steam_info")
 const discord_info = document.getElementById("discord_info")
+const unlink = document.getElementById("unlink")
 
 const current_address = document.URL
 
-console.log(discord_btn.href)
+
 if (steam_btn.href == current_address) {
       steam_info.innerText = "Account Linked"
       steam_info.className = "ok_txt"
       steam_btn.innerHTML = "<i class=\"far fa-check-circle check\"></i>"
       steam_btn.removeAttribute("href")
       steam_btn.className = "button button_gray"
+
 }
 
 if (discord_btn.href == current_address) {
@@ -43,4 +45,10 @@ if (discord_btn.href == current_address) {
       discord_btn.innerHTML = "<i class=\"far fa-check-circle check\"></i>"
       discord_btn.removeAttribute("href")
       discord_btn.className = "button button_gray"
+
+
+}
+
+if(unlink.href != current_address){
+      unlink.style.visibility = "visible"
 }

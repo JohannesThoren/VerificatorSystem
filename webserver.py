@@ -112,7 +112,7 @@ async def link():
     if steam_id != None and discord_id != None and discord_username != None:
         return await add_user_and_render()
     elif steam_id != None and discord_id != None and session != None:
-        return render_template("views/link.html", discord_id=discord_id, steam_id=steam_id)
+        return render_template("views/link.html", unlink_url="/unlink", discord_id=discord_id, steam_id=steam_id)
 
     else:
         if steam_id != None and discord_id == None:
@@ -146,7 +146,7 @@ async def add_user_and_render():
         steam_id, discord_id, discord_username, session = get_cookies()
 
 
-        resp = make_response(render_template("views/link.html", discord_id=discord_id, steam_id=steam_id))
+        resp = make_response(render_template("views/link.html",unlink_url="/unlink", discord_id=discord_id, steam_id=steam_id))
         delete_cookies(resp)
 
         tmp_session = hashlib.md5(str(str(steam_id)+str(discord_id)+str(datetime.now().strftime('%Y-%m-%d %H:%M'))).encode("UTF-8")).hexdigest()
