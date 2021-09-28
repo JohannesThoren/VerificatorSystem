@@ -22,13 +22,35 @@ def remove_link_from_db(mongo, discord_id, steam_id):
     else:
         False
 
-def fetch_session(mongo, discord_id):
+def fetch_ids_by_session(mongo, session):
+    db_link = mongo.db.links
+    link = db_link.find_one({"session": session})
+    print(link)
+    if link:
+        return link
+    else:
+        return False
+
+def fetch_session_by_discord_id(mongo, discord_id):
         db_link = mongo.db.links
         link = db_link.find_one({"discord_id": discord_id})
 
         if link:
-            tmp_session = hashlib.md5(str(str(steam_id)+str(discord_id)+str(datetime.now().strftime('%Y-%m-%d %H:%M'))).encode("UTF-8")).hexdigest()
+            tmp_session = hashlib.md5(str(str(discord_id)+str(datetime.now().strftime('%Y-%m-%d %H:%M'))).encode("UTF-8")).hexdigest()
             db_link.update({"discord_id": discord_id}, {"$set": {"session": tmp_session}})
+
+            return tmp_session
+        else:
+            return False
+
+
+def fetch_session_by_steam_id(mongo, steam_id):
+        db_link = mongo.db.links
+        link = db_link.find_one({"steam_id": steam_id})
+
+        if link:
+            tmp_session = hashlib.md5(str(str(steam_id)+str(datetime.now().strftime('%Y-%m-%d %H:%M'))).encode("UTF-8")).hexdigest()
+            db_link.update({"steam_id": steam_id}, {"$set": {"session": tmp_session}})
 
             return tmp_session
         else:

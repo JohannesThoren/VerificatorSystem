@@ -22,51 +22,82 @@ app = Flask(__name__, static_folder='static')
 app.config["MONGO_URI"] = env["db"]["url"]
 mongo = PyMongo(app)
 
-
-@app.route('/')
-def home():
-    return render_template('index.html')
-
-@app.route('/discord')
-def discord():
+def get_discord_id():
     code = request.args.get("code")
     if code:
         token = discord_oauth.get_access_token(code)["access_token"]
         user = discord_oauth.get_user(token)
-        
+
+        session = db_website.fetch_session_by_discord_id(mongo, user["id"])
+        link = db_website.fetch_ids_by_session(mongo, session)
+        if link != False:
+            resp = make_response(redirect("/link"))
+            resp.set_cookie("steam_id", value=link["steam_id"])
+            resp.set_cookie("discord_id", value=link["discord_id"])
+            resp.set_cookie("session", value=link["session"])
+            return resp
+
         resp = make_response(redirect("/link"))
         resp.set_cookie("discord_id", value=user["id"])
         resp.set_cookie("discord_username", value=user["username"]) 
 
-        print(user)
         return resp
     else:
-        return render_template("views/discord.html", discord_url = env["oauth_discord"]["sign_in_url"])
-
-@app.route('/steam/auth')
-def auth_steam():
-    hostname = "http://"+env["webserver"]["hostname"]+":"+str(env["webserver"]["port"])
-    steamLogin = SteamSignIn()
-    return steamLogin.RedirectUser(steamLogin.ConstructURL(f"{hostname}/steam"))
-  
-
-@app.route('/steam')
-def steam():
+        return redirect("/link")
+        
+def get_steam_id():
     user = request.args.get("openid.identity")
     if user:
         parts = user.split("/")
         id = parts[len(parts) -1 ]
+
+        session = db_website.fetch_session_by_steam_id(mongo, id)
+        link = db_website.fetch_ids_by_session(mongo, session)
+        if link != False:
+            resp = make_response(redirect("/link"))
+            resp.set_cookie("steam_id", value=link["steam_id"])
+            resp.set_cookie("discord_id", value=link["discord_id"])
+            resp.set_cookie("session", value=link["session"])
+            return resp
+
         resp = make_response(redirect("/link"))
         resp.set_cookie("steam_id", value=id)
 
         return resp 
     else:
-        return render_template("views/steam.html", steam_url="/steam/auth")
+        return redirect("/link")
 
+@app.route('/')
+def home():
+    return render_template('index.html')
 
-@app.route('/link/<session>')
-def recover_link(session):
-    return
+@app.route('/steam/auth')
+def steam_auth():
+    hostname = "http://"+env["webserver"]["hostname"]+":"+str(env["webserver"]["port"])
+    steamLogin = SteamSignIn()
+    return steamLogin.RedirectUser(steamLogin.ConstructURL(f"{hostname}/steam"))
+
+@app.route('/steam')
+def steam():
+    return get_steam_id()
+
+@app.route('/discord')
+def discord():
+    return get_discord_id()
+
+@app.route('/unlink')
+def unlink():
+    steam_id, discord_id, discord_username, session = get_cookies()
+    resp = make_response(redirect("/link"))
+    link = db_website.fetch_ids_by_session(mongo, session)
+    if link != False:
+        
+        db_website.remove_link_from_db(mongo, link["discord_id"], link["steam_id"])
+        delete_cookies(resp)
+        return resp
+    else:
+        return "poof"
+
 
 # gör så att man hamnar på link sidan.
 # FUNKTIONER
@@ -74,24 +105,49 @@ def recover_link(session):
 # - är de inte länkade ta användare till en sida för att länka sina konton
 @app.route('/link')
 async def link():
+    steam_id, discord_id, discord_username, session = get_cookies()
+    print(steam_id)
+    print(discord_id)    
+
+    if steam_id != None and discord_id != None and discord_username != None:
+        return await add_user_and_render()
+    elif steam_id != None and discord_id != None and session != None:
+        return render_template("views/link.html", discord_id=discord_id, steam_id=steam_id)
+
+    else:
+        if steam_id != None and discord_id == None:
+            return render_template("views/link.html", discord_url=env["oauth_discord"]["sign_in_url"], steam_id=steam_id, discord_id="[Not Linked]")
+
+        elif steam_id == None and discord_id != None:
+            return render_template("views/link.html", steam_url="/steam/auth", discord_id=discord_id, steam_id="[Not Linked]")
+
+        elif steam_id == None and discord_id == None:
+            return render_template("views/link.html", steam_url="/steam/auth", discord_url=env["oauth_discord"]["sign_in_url"], steam_id="[Not Linked]", discord_id="[Not Linked]")
+
+        elif session != None:
+            return render_template("views/link.html")
+       
+
+
+def get_cookies():
     steam_id = request.cookies.get("steam_id")
     discord_id = request.cookies.get("discord_id")
     discord_username = request.cookies.get("discord_username")
     session = request.cookies.get("session")
 
-    print(steam_id)
+    return (steam_id, discord_id, discord_username, session)
 
-    if discord_id == None:
-        return make_response(redirect("/discord"))
-    elif steam_id == None:
-        return make_response(redirect("/steam"))
-    elif session != None:
-        return "poof"
-    else:
+def delete_cookies(resp):
+    resp.delete_cookie("discord_id")
+    resp.delete_cookie("discord_username")
+    resp.delete_cookie("steam_id")
+
+async def add_user_and_render():
+        steam_id, discord_id, discord_username, session = get_cookies()
+
+
         resp = make_response(render_template("views/link.html", discord_id=discord_id, steam_id=steam_id))
-        resp.delete_cookie("discord_id")
-        resp.delete_cookie("discord_username")
-        resp.delete_cookie("steam_id")
+        delete_cookies(resp)
 
         tmp_session = hashlib.md5(str(str(steam_id)+str(discord_id)+str(datetime.now().strftime('%Y-%m-%d %H:%M'))).encode("UTF-8")).hexdigest()
         resp.set_cookie("session", tmp_session)
@@ -99,11 +155,9 @@ async def link():
         # TODO add a "add to database" function
 
         if db_website.add_link_to_db(mongo, tmp_session, discord_id, steam_id, discord_username):
-            await webhook.new_user_added(discord_id, discord_username, steam_id)
-        
+            await webhook.new_user_added(discord_id, discord_username, steam_id, )
+
         return resp
-
-
 
 if __name__ == "__main__":
     app.run(debug=True, host=env["webserver"]["host"], port=env["webserver"]["port"])

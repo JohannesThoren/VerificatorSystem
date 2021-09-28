@@ -43,8 +43,19 @@ body {
   background-color: var(--bg1);
 }
 
+.ok_txt {color: var(--acc1);}
+.warning_txt {color: var(--acc3);}
+
+
 .title {
   text-align: center;
+}
+
+.check {
+  color: var(--acc1);
+  font-size: 2em;
+  margin: 0px;
+  padding: 0px;
 }
 
 .button i {
@@ -70,8 +81,19 @@ body {
   transition: 0.2s;
 }
 
+.button_gray {
+  color: var(--bg2)
+}
+
+.button_gray:hover {
+  background-color: var(--bg2);
+  color: var(--bg2);
+  border: 2px solid var(--bg2);
+  transition: 0.2s;
+}
+
 .button_ok {
-  color: var(--acc1);
+  color: var(--acc2);
 }
 
 .button_ok:hover {

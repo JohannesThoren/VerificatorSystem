@@ -48,7 +48,7 @@ async def get_link_by_steam_id(ctx, arg):
         await ctx.channel.send(embed=link_embed(link))
     
     else:
-        await ctx.channel.send("could not find anyone with that discord id...")
+        await ctx.channel.send("could not find anyone with that steam id...")
 
 
 for guild in client.guilds:
