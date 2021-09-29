@@ -28,7 +28,7 @@ def link_embed(link):
     embed.add_field(name="Stean Profile", value=f"{STEAM_COMMUNITY_URL}{steam_id}")
     
     return embed
-
+# added some cool stuff
 @bot.command(name="discordid", aliases=["DID", "did"])
 async def get_link_by_discord_id(ctx, arg):
     if "<" in arg:
@@ -37,7 +37,7 @@ async def get_link_by_discord_id(ctx, arg):
         arg = arg.replace("@", "")
         if "!" in arg:
             arg = arg.replace("!", "")
-            
+
     link = db_bot.fetch_link_by_discord_id(mongo, arg)
     embed = discord.Embed()
 
