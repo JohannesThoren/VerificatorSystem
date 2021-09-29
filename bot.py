@@ -31,7 +31,13 @@ def link_embed(link):
 
 @bot.command(name="discordid", aliases=["DID", "did"])
 async def get_link_by_discord_id(ctx, arg):
-
+    if "<" in arg:
+        arg = arg.replace("<", "")
+        arg = arg.replace(">", "")
+        arg = arg.replace("@", "")
+        if "!" in arg:
+            arg = arg.replace("!", "")
+            
     link = db_bot.fetch_link_by_discord_id(mongo, arg)
     embed = discord.Embed()
 
@@ -57,8 +63,10 @@ for guild in client.guilds:
     print(guild.name)
 
 
-@client.event
+@bot.event
 async def on_message(msg):
+    await bot.process_commands(msg) 
+
     embeds = msg.embeds
     embed_dict = ""
     do_reaction =  env["app"]["app-react-on-webhook"]
@@ -83,5 +91,4 @@ async def on_message(msg):
             
 
 
-client.run(env["app"]["app-token"])
 bot.run(env["app"]["app-token"])
