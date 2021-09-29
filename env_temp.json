@@ -1,23 +1,23 @@
 {
     "app": {
-        "app-name": "verificator",
-        "app-role-name": "verified",
-        "app-id": "890866460275142716",
-        "app-token": "ODkwODY2NDYwMjc1MTQyNzE2.YU2CCw._VDViSVA6be1vin333F-jAlUwbk",
-        "app-secret": "0xs9JRiHURVcBb87G5Pz1jIbL4zvN3_c",
+        "app-name": "",
+        "app-role-name": "",
+        "app-id": "",
+        "app-token": "",
+        "app-secret": "",
         "app-bot-prefix": "!",
-        "app-webhook-url": "https://discord.com/api/webhooks/891746912850550844/Bq8LPFGKJu1eLCk3bDro_9jjbh0pgM39pZn4iWWq6Agcx3hBkDE4tW9H4cTuGcBiT6HE",
-        "app-oauth-url": "https://discord.com/api/oauth2/authorize?client_id=890866460275142716&redirect_uri=http%3A%2F%2Flocalhost%3A3500%2Fdiscord&response_type=code&scope=identify",
-        "app-scope": "identify",
-        "app-react-on-webhook": true
+        "app-webhook-url": "",
+        "app-oauth-url": "",
+        "app-scope": "",
+        "app-react-on-webhook": false
     },
     "webserver": {
         "webserver-port": 8000,
-        "webserver-host": "localhost",
-        "webserver-uri": "http://localhost:3500",
-        "webserver-devmode": true
+        "webserver-host": "",
+        "webserver-uri": "",
+        "webserver-devmode": false
     },
     "database": {
-        "database-url": "mongodb://localhost:27017/verificator"
+        "database-url": ""
     }
 }
