@@ -80,10 +80,12 @@ async def on_message(msg):
         user = await msg.guild.fetch_member(int(embed_dict["fields"][0]["value"]))
         if embed_dict["title"] == "Linked!":
             await user.add_roles(role)
+            print(f"{user.name} just linked thiere accounts")
             
 
         elif embed_dict["title"] == "Unlinked!":
             await user.remove_roles(role)
+            print(f"{user.name} just unlinked thiere accounts")
             
 
         if do_reaction:

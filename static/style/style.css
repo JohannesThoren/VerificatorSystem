@@ -96,6 +96,7 @@ img {
   background-color: var(--acc2);
   border: 2px solid var(--acc2);
   transition: 0.2s;
+  cursor: pointer;
 }
 
 .button_gray {
@@ -110,7 +111,7 @@ img {
 }
 
 .button_ok {
-  color: var(--acc2);
+  color: var(--acc1);
 }
 
 .button_ok:hover {
