@@ -1,0 +1,15 @@
+:root {
+    --acc1: #55bb55;
+    --acc2: #bb5555;
+    --acc3: #5555bb;
+
+    --dark: #3e3e3e;
+    --darker: #1f1f1f;
+
+    --color: black;
+
+    --radius: 3px;
+    --card-margin: 5px;
+
+    --font: arial; 
+}

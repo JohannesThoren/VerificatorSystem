@@ -1,66 +1,56 @@
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+    <link rel="stylesheet" href="/static/style/root.css" />
+    <link rel="stylesheet" href="/static/style/colors.css" />
+    <link rel="stylesheet" href="/static/style/button.css" />
+    <link rel="stylesheet" href="/static/style/cards.css" />
+    <link rel="stylesheet" href="/static/style/style.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
 
-  <link rel="stylesheet" href="/static/style/style.css" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <script src="/static/src/check_link.js" defer></script>
+    <script src="/static/src/branding.js" defer></script>
+  </head>
 
-  <script src="/static/src/gray_btns.js" defer></script>
-  <script src="/static/src/branding.js" defer></script>
-</head>
-
-<body>
-  <div id="branding" class="content">
-    <div id="baranding-header">
-      <h1 id="branding-title" class="title"></h1>
-      <img id="branding-icon" src="" alt="">
+  <body class="darker" id="barnding-header">
+    <div class="card card-m dark center_item">
+      <div id="header">
+        <h1 class="title center_item" id="branding-title"></h1>
+        <img id="branding-icon" class="center_item" src="" alt="">
+      </div>
+      <p class="center_text" id="branding-info">
+      </p>
     </div>
-    <p id="branding-info">
 
-    </p>
-
-  </div>
-
-  <div class="content">
-    <h1 class="title">Link Discord Account</h1>
-    <p id="discord_info">
-      To link your Discord account you need to sign in, press the button
-      below.
-    </p>
-    <div class="button_group">
-      <a id="discord_link_btn" href="{{discord_url}}" class="button button_discord">Sign in Discord<i
-          class="fab fa-discord"></i></a>
-    </div>
-  </div>
-
-  <div class="content">
-    <h1 class="title">Link Steam Account</h1>
-    <p id="steam_info">
-      You also have to sign in to steam, please press the button below to sign
-      in.
-    </p>
-
-    <div class="button_group">
-      <a id="steam_link_btn" href="{{steam_url}}" class="button button_steam">Sign in Steam<i
+    <div class="card card-m dark center_item">
+      <h1 class="title center_text">Link Steam Account</h1>
+      <p class="center_text" id="steam_info">
+        Sit in ut cupidatat labore et adipisicing duis id magna Lorem.
+      </p>
+      <div class="button_group"> 
+        <a class="button center_item" id="steam_link_btn" href="{{steam_url}}">Sign into Steam<i
           class="fab fa-steam"></i></a>
+      </div>
     </div>
-  </div>
-
-  <div class="content">
-    <h1 class="title">Your account link</h1>
-    <p>When you have linked your accounts, you are able to unlink them at any time.</p>
-    <div class="center">Discord id <span class="ok_txt">{{discord_id}}</span></div>
-    <div class="center">Steam id <span class="ok_txt">{{steam_id}}</span></div>
-
-    <div class="button_group">
-      <a id="unlink"" href=" {{unlink_url}}" class="button button_warning">Unlink Accounts<i
-          class="fas fa-unlink"></i></a>
+    <div class="card card-m dark center_item">
+      <h1 class="title center_text">Link Discord Account</h1>
+      <p class="center_text" id="discord_info">Fugiat nulla deserunt ut adipisicing.</p>
+      <div class="button_group"> 
+        <a class="button center_item" id="discord_link_btn" href="{{discord_url}}">Sign into Discord<i
+          class="fab fa-discord"></i></a>
+      </div>
     </div>
-  </div>
-</body>
+    <div class="card card-m dark center_item">
+      <h1 class="title center_text">Linked Accounts</h1>
+      <p class="center_text">Steam ID: <span class="txt_ok">{{steam_id}}</span></p>
+      <p class="center_text">Discord ID: <span class="txt_ok">{{discord_id}}</span></p>
 
+      <div class="button_group"> 
+        <a class="button button_ok center_item" id="settings_btn" href="/settings">Settings<i class="fas fa-cog"></i></a><div>
+    </div>
+  </body>
 </html>

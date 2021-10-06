@@ -40,6 +40,7 @@ def delete_cookies(resp):
     resp.delete_cookie("discord_id")
     resp.delete_cookie("discord_username")
     resp.delete_cookie("steam_id")
+    resp.delete_cookie("session")
 
 async def add_user_and_render(mongo):
 
@@ -65,12 +66,12 @@ def get_discord_id(mongo):
         user = discord_oauth.get_user(token)
 
         session = db_website.fetch_session_by_discord_id(mongo, user["id"])
-        link = db_website.fetch_ids_by_session(mongo, session)
+        link = db_website.fetch_link_by_session(mongo, session)
         if link != False:
             resp = make_response(redirect("/link"))
             resp.set_cookie("steam_id", value=link["steam_id"])
             resp.set_cookie("discord_id", value=link["discord_id"])
-            resp.set_cookie("session", value=link["session"])
+            resp.set_cookie("session", value=session)
             return resp
 
         resp = make_response(redirect("/link"))
@@ -88,12 +89,13 @@ def get_steam_id(mongo):
         id = parts[len(parts) - 1]
 
         session = db_website.fetch_session_by_steam_id(mongo, id)
-        link = db_website.fetch_ids_by_session(mongo, session)
+
+        link = db_website.fetch_link_by_session(mongo, session)
         if link != False:
             resp = make_response(redirect("/link"))
             resp.set_cookie("steam_id", value=link["steam_id"])
             resp.set_cookie("discord_id", value=link["discord_id"])
-            resp.set_cookie("session", value=link["session"])
+            resp.set_cookie("session", value=session)
             return resp
 
         resp = make_response(redirect("/link"))
@@ -102,3 +104,10 @@ def get_steam_id(mongo):
         return resp
     else:
         return redirect("/link")
+
+
+def get_settings_toggle(mongo):
+
+    
+
+    return

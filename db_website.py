@@ -1,5 +1,6 @@
 from datetime import datetime
 import hashlib
+from os import link
 
 
 def add_link_to_db(mongo, session, discord_id, steam_id, discord_username):
@@ -9,7 +10,7 @@ def add_link_to_db(mongo, session, discord_id, steam_id, discord_username):
     if link: 
         return False
     else:
-        new_link = {"discord_id": discord_id, "steam_id": steam_id, "discord_username": discord_username, "session": session}
+        new_link = {"discord_id": discord_id, "steam_id": steam_id, "discord_username": discord_username, "session": session, "togg_1": False, "togg_2": False, "togg_3": False, "togg_4": False}
         db_link.insert(new_link)
     return True
 
@@ -22,7 +23,7 @@ def remove_link_from_db(mongo, discord_id, steam_id):
     else:
         False
 
-def fetch_ids_by_session(mongo, session):
+def fetch_link_by_session(mongo, session):
     db_link = mongo.db.links
     link = db_link.find_one({"session": session})
     if link:
@@ -54,3 +55,27 @@ def fetch_session_by_steam_id(mongo, steam_id):
             return tmp_session
         else:
             return False
+
+
+def toggle(mongo, session, toggle):
+
+    db_link = mongo.db.links
+    link = db_link.find_one({"session": session})
+    if link:
+            state = link[f"togg_{toggle}"]
+            if state == True:
+                db_link.update({"session": session}, {"$set": {f"togg_{toggle}": False}})
+            elif state == False:
+                db_link.update({"session": session}, {"$set": {f"togg_{toggle}": True}})
+
+    else:
+        return False 
+
+def fetch_toggles(mongo, session):
+
+    db_link = mongo.db.links
+    link = db_link.find_one({"session": session})
+    if link:
+        return (link["togg_1"], link["togg_2"], link["togg_3"], link["togg_4"])
+    else:
+        return False 

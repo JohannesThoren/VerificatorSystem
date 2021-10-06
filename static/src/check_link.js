@@ -25,30 +25,34 @@ const steam_btn = document.getElementById("steam_link_btn")
 const discord_btn = document.getElementById("discord_link_btn")
 const steam_info = document.getElementById("steam_info")
 const discord_info = document.getElementById("discord_info")
-const unlink = document.getElementById("unlink")
 
 const current_address = document.URL
 
+const settings_btn = document.getElementById("settings_btn")
 
 if (steam_btn.href == current_address) {
       steam_info.innerText = "Account Linked"
-      steam_info.className = "ok_txt"
+      steam_info.className = "txt_ok center_text"
       steam_btn.innerHTML = "<i class=\"far fa-check-circle check\"></i>"
       steam_btn.removeAttribute("href")
-      steam_btn.className = "button button_gray"
+      steam_btn.className = "center_item txt_ok"
+      steam_btn.style.fontSize = "3em"
 
 }
 
 if (discord_btn.href == current_address) {
       discord_info.innerText = "Account Linked"
-      discord_info.className = "ok_txt"
+      discord_info.className = "txt_ok center_text"
       discord_btn.innerHTML = "<i class=\"far fa-check-circle check\"></i>"
       discord_btn.removeAttribute("href")
-      discord_btn.className = "button button_gray"
-
+      discord_btn.className = "center_item txt_ok"
+      discord_btn.style.fontSize = "3em"
 
 }
 
-if(unlink.href != current_address){
-      unlink.style.visibility = "visible"
+if (discord_btn.href == "" && steam_btn.href == "") {
+      settings_btn.className = "center_item button button_ok"
+}
+else {
+      settings_btn.className = "hidden"
 }

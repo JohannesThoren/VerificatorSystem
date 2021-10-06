@@ -5,44 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
-    <link rel="stylesheet" href="/static/style/style.css">
+    <link rel="stylesheet" href="/static/style/root.css" />
+    <link rel="stylesheet" href="/static/style/colors.css" />
+    <link rel="stylesheet" href="/static/style/button.css" />
+    <link rel="stylesheet" href="/static/style/cards.css" />
+    <link rel="stylesheet" href="/static/style/style.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+
+    <script src="/static/src/toggles.js" defer></script>
 
 </head>
-<body>
-        <div class="content">
-            <h1 class="title">Profile Settings</h1>
-            <p>The settings and toggles for your account link</p>
-            <div class="center">
-                <div>Discord account ID <span class="ok_txt">{{discord_id}}</span></div>
-                <div>Steam account ID <span class="ok_txt">{{steam_id}}</span></div>
-                <div class="button_group">
-                    <a class="button button_warning" href="/unlink">Unlink Accounts</a>
-                </div>
-            </div>
-        </div>
+<body class="darker">
+    <div class="card card-m dark center_item">
+        <h1 class="title center_text">Profile</h1>
+        <p class="center_text">Profile settings, here you are able to toggle some settings on or off and unlink your accounts</p>
+        <P class="center_text">Steam ID <span class="txt_ok">{{steam_id}}</span></P>
+        <P class="center_text">Discord ID <span class="txt_ok">{{discord_id}}</span></P>
+    </div>
 
-        <div class="content">
-            <h1 class="title">
-                Trade Alerts
-            </h1>
-            <p>
-                toggle all trade alerts form the trade system
-            </p>
-            <div class="button_group">
-                <a class="button button_ok" href="">Alerts: on</a>
-            </div>
+    <div class="card card-m center_item dark">
+        
+        <h1 class="title center_text">Toggles</h1>
+        <p class="center_text">False = off, True = on</p>
+
+        <h4 class="subtitle center_text">Translator: <span id="togg_1">{{togg_1}}</span></h4>
+        <div class="button_group"><a href="/toggle/1" class="button center_item">Toggle On/Off</a></div>
+
+        <h4 class="subtitle center_text">Alerts: <span id="togg_2">{{togg_2}}</span></h4>
+        <div class="button_group"><a href="/toggle/2" class="button center_item">Toggle On/Off</a></div>
+
+        <h4 class="subtitle center_text">WIP: <span id="togg_3">{{togg_3}}</span></h4>
+        <div class="button_group"><a href="/toggle/3" class="button center_item">Toggle On/Off</a></div>
+
+        <h4 class="subtitle center_text">WIP: <span id="togg_4">{{togg_4}}</span></h4>
+        <div class="button_group"><a href="/toggle/4" class="button center_item">Toggle On/Off</a></div>
+
+    </div>
+
+    <div class="card card-m center_item dark">
+        <h1 class="title center_text">Unlink Accounts</h1>
+        <p class="center_text">Unlinking your accounts will remove your database entry. But this can result in you loosing access to some stuff</p>
+        <div class="button_group">
+            <a href="/unlink" class="button center_item button_warning">Unlink Accounts</a>
         </div>
-        <div class="content">
-            <h1 class="title">
-                Trade Alerts
-            </h1>
-            <p>
-                toggle all trade alerts form the trade system
-            </p>
-            <div class="button_group">
-                <a class="button button_ok" href="">Alerts: on</a>
-            </div>
-        </div>
+    </div>
 </body>
 </html>

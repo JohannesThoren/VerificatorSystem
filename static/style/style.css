@@ -1,184 +1,32 @@
-/*
- *   Copyright (c) 2021 Johannes Thorén
- *   All rights reserved.
-
- *   Permission is hereby granted, free of charge, to any person obtaining a copy
- *   of this software and associated documentation files (the "Software"), to deal
- *   in the Software without restriction, including without limitation the rights
- *   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- *   copies of the Software, and to permit persons to whom the Software is
- *   furnished to do so, subject to the following conditions:
- 
- *   The above copyright notice and this permission notice shall be included in all
- *   copies or substantial portions of the Software.
- 
- *   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- *   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- *   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- *   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- *   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- *   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- *   SOFTWARE.
- */
-
-:root {
-  --bg1: #313231;
-  --bg2: #535453;
-  --txt1: white;
-  --txt2: #ababab;
-  --acc1: #44bb44;
-  --acc2: #4444ee;
-  --acc3: #ee4444;
-  --steam-color: #468ff5;
-  --discord-color: #7289da;
-  --border-radius: 3px;
-}
-
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  color: var(--txt1);
-  margin: 0px;
-  background-color: var(--bg1);
+    font-family: var(--font);
 }
 
-img {
-  max-width: 150px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 100%;
-}
-
-#baranding-header {
-  margin: 10px;
-  display: grid;
-  grid-template-columns: 1.5fr 0.5fr;
-  align-items: center;
-}
-
-.ok_txt {
-  color: var(--acc1);
-}
-
-.warning_txt {
-  color: var(--acc3);
+i {
+    margin: 5px;
 }
 
 .title {
-  text-align: center;
+    font-family: var(--font);
+    font-size: 2em;
 }
 
-.check {
-  color: var(--acc1);
-  font-size: 2em;
-  margin: 0px;
-  padding: 0px;
+.subtitle {
+    font-family: var(--font);
+    font-size: 1.5em;
+    color: grey;
 }
 
-.button i {
-  margin-left: 5px;
-  margin-rigth: 5px;
+.center_item {
+    margin-left: auto;
+    margin-right: auto;
+    /* text-align: center; */
 }
 
-.button {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  color: var(--acc2);
-  border: 2px solid;
-  text-decoration: none;
-  border-radius: var(--border-radius);
-  background-color: var(--bg2);
-  margin: 10px;
+.center_text {
+    text-align: center;
 }
 
-.button:hover {
-  color: white;
-  background-color: var(--acc2);
-  border: 2px solid var(--acc2);
-  transition: 0.2s;
-  cursor: pointer;
-}
-
-.button_gray {
-  color: var(--bg2);
-}
-
-.button_gray:hover {
-  background-color: var(--bg2);
-  color: var(--bg2);
-  border: 2px solid var(--bg2);
-  transition: 0.2s;
-}
-
-.button_ok {
-  color: var(--acc1);
-}
-
-.button_ok:hover {
-  background-color: var(--acc1);
-  border: 2px solid var(--acc1);
-}
-
-.button_warning {
-  color: var(--acc3);
-}
-
-.button_warning:hover {
-  background-color: var(--acc3);
-  border: 2px solid var(--acc3);
-}
-
-.button_discord {
-  color: var(--discord-color);
-}
-
-.button_discord:hover {
-  background-color: var(--discord-color);
-  border: 2px solid var(--discord-color);
-}
-
-.button_steam {
-  color: var(--steam-color);
-}
-
-.button_steam:hover {
-  background-color: var(--steam-color);
-  border: 2px solid var(--steam-color);
-}
-
-.button_group {
-  display: flex;
-  justify-content: center;
-}
-
-.content p {
-  text-align: center;
-}
-
-.content {
-  margin: 20px;
-  padding: 5px;
-  border-radius: var(--border-radius);
-  background-color: var(--bg2);
-  width: 40%;
-  margin-left: auto;
-  margin-right: auto;
-  min-height: 180px;
-}
-
-.center {
-  margin: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-#unlink {
-  visibility: hidden;
-}
-
-@media screen and (max-width: 1200px) {
-  .content {
-    width: 60%;
-  }
+.hidden   {
+    visibility: hidden;
 }
