@@ -5,6 +5,14 @@ body {
 i {
     margin: 5px;
 }
+img {
+    border-radius: 100%;
+    width: 100px;
+}
+
+#header {
+    display: flex;
+}
 
 .title {
     font-family: var(--font);

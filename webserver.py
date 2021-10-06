@@ -80,10 +80,8 @@ async def settings():
     steam_id, discord_id, discord_username, session = get_cookies()
     
     if session == None and discord_id == None and steam_id == None:
-        print("x")
         return redirect("/link")
     else:
-        print(session)
         t1, t2, t3, t4 = db_website.fetch_toggles(mongo, session)
         return render_template("views/settings.html", discord_id=discord_id, steam_id=steam_id, togg_1=t1, togg_2=t2, togg_3=t3, togg_4=t4,)
 
