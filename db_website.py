@@ -76,6 +76,10 @@ def fetch_toggles(mongo, session):
     db_link = mongo.db.links
     link = db_link.find_one({"session": session})
     if link:
-        return (link["togg_1"], link["togg_2"], link["togg_3"], link["togg_4"])
+        if "togg_1" in link.keys():
+            return (link["togg_1"], link["togg_2"], link["togg_3"], link["togg_4"])
+        else:
+            db_link.update({"session": session}, {"$set": {"togg_1": False, "togg_2": False, "togg_3": False, "togg_4": False}})
+            return fetch_toggles(mongo, session)
     else:
         return False 
