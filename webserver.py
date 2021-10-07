@@ -19,7 +19,6 @@ import db_website
 from werkzeug.wrappers import response
 
 
-# TODO remove /discord /steam and only have /link
 env = json.load(open("env.json"))
 
 app = Flask(__name__, static_folder='static')
@@ -93,12 +92,6 @@ async def toggle(id):
     else:
         db_website.toggle(mongo, session, id)
         return redirect("/settings")
-
-
-# API
-@app.route("/api/<api_key>/<action>")
-def api(api_key, action):
-    return "WIP"
 
 
 if __name__ == "__main__":
