@@ -10,7 +10,7 @@ def add_link_to_db(mongo, session, discord_id, steam_id, discord_username):
     if link: 
         return False
     else:
-        new_link = {"discord_id": discord_id, "steam_id": steam_id, "discord_username": discord_username, "session": session, "togg_1": False, "togg_2": False, "togg_3": False, "togg_4": False}
+        new_link = {"discord_id": discord_id, "steam_id": steam_id, "discord_username": discord_username, "session": session, "togg_1": True, "togg_2": True, "togg_3": Treu, "togg_4": True}
         db_link.insert(new_link)
     return True
 
@@ -79,7 +79,7 @@ def fetch_toggles(mongo, session):
         if "togg_1" in link.keys():
             return (link["togg_1"], link["togg_2"], link["togg_3"], link["togg_4"])
         else:
-            db_link.update({"session": session}, {"$set": {"togg_1": False, "togg_2": False, "togg_3": False, "togg_4": False}})
+            db_link.update({"session": session}, {"$set": {"togg_1": True, "togg_2": True, "togg_3": True, "togg_4": True}})
             return fetch_toggles(mongo, session)
     else:
         return False 
