@@ -57,7 +57,8 @@ async def unlink():
         db_website.remove_link_from_db(
             mongo, link["discord_id"], link["steam_id"])
         delete_cookies(resp)
-        await webhook.unlink_msg(link["discord_id"], link["discord_username"], link["steam_id"])
+        ip = request.remote_addr
+        await webhook.unlink_msg(link["discord_id"], link["discord_username"], link["steam_id"], ip)
         return resp
     else:
         return "poof"
@@ -67,7 +68,8 @@ async def link():
     steam_id, discord_id, discord_username, session = get_cookies()
 
     if steam_id != None and discord_id != None and session == None:
-        return await add_user_and_render(mongo)
+        ip = request.remote_addr
+        return await add_user_and_render(mongo, ip)
     elif steam_id != None and discord_id != None and session != None:
         return render_template("views/link.html", unlink_url="/unlink", discord_id=discord_id, steam_id=steam_id)
 

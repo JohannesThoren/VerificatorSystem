@@ -9,7 +9,9 @@
         "app-webhook-url": "",
         "app-oauth-url": "",
         "app-scope": "",
-        "app-react-on-webhook": false
+        "app-react-on-webhook": false,
+        "app-get-user-ip": true
+
     },
     "webserver": {
         "webserver-port": 8000,
