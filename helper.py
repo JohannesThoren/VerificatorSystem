@@ -42,7 +42,7 @@ def delete_cookies(resp):
     resp.delete_cookie("steam_id")
     resp.delete_cookie("session")
 
-async def add_user_and_render(mongo):
+async def add_user_and_render(mongo, ip):
 
     steam_id, discord_id, discord_username, session = get_cookies()
 
@@ -55,7 +55,7 @@ async def add_user_and_render(mongo):
     resp.set_cookie("session", tmp_session)
 
     if db_website.add_link_to_db(mongo, tmp_session, discord_id, steam_id, discord_username):
-        await webhook.new_user_added(discord_id, discord_username, steam_id, )
+        await webhook.new_user_added(discord_id, discord_username, steam_id, ip)
 
     return resp
 
