@@ -1,3 +1,5 @@
+
+
 from datetime import datetime
 import hashlib
 from os import link
@@ -10,7 +12,7 @@ def add_link_to_db(mongo, session, discord_id, steam_id, discord_username):
     if link: 
         return False
     else:
-        new_link = {"discord_id": discord_id, "steam_id": steam_id, "discord_username": discord_username, "session": session, "togg_1": True, "togg_2": True, "togg_3": Treu, "togg_4": True}
+        new_link = {"discord_id": discord_id, "steam_id": steam_id, "discord_username": discord_username, "session": session, "togg_1": True, "togg_2": True, "togg_3": True, "togg_4": True}
         db_link.insert(new_link)
     return True
 
