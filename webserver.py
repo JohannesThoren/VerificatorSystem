@@ -1,3 +1,4 @@
+import db_api
 from re import M
 from flask import Flask, render_template, request, jsonify
 from flask.helpers import make_response
@@ -25,13 +26,16 @@ app = Flask(__name__, static_folder='static')
 app.config["MONGO_URI"] = env["database"]["database-url"]
 mongo = PyMongo(app)
 
+
 @app.route('/')
 def home():
     return render_template('index.html')
 
+
 @app.route('/branding')
 def branding():
     return json.load(open("branding.json"))
+
 
 @app.route('/steam/auth')
 def steam_auth():
@@ -39,13 +43,16 @@ def steam_auth():
     steamLogin = SteamSignIn()
     return steamLogin.RedirectUser(steamLogin.ConstructURL(f"{hostname}/steam"))
 
+
 @app.route('/steam')
 def steam():
     return get_steam_id(mongo)
 
+
 @app.route('/discord')
 def discord():
     return get_discord_id(mongo)
+
 
 @app.route('/unlink')
 async def unlink():
@@ -63,6 +70,7 @@ async def unlink():
     else:
         return "poof"
 
+
 @app.route('/link')
 async def link():
     steam_id, discord_id, discord_username, session = get_cookies()
@@ -76,15 +84,17 @@ async def link():
     else:
         return helper_link_check_cookies(steam_id, discord_id, session, env)
 
+
 @app.route('/settings')
 async def settings():
     steam_id, discord_id, discord_username, session = get_cookies()
-    
+
     if session == None and discord_id == None and steam_id == None:
         return redirect("/link")
     else:
         t1, t2, t3, t4 = db_website.fetch_toggles(mongo, session)
         return render_template("views/settings.html", discord_id=discord_id, steam_id=steam_id, togg_1=t1, togg_2=t2, togg_3=t3, togg_4=t4,)
+
 
 @app.route('/toggle/<id>')
 async def toggle(id):
@@ -94,6 +104,19 @@ async def toggle(id):
     else:
         db_website.toggle(mongo, session, id)
         return redirect("/settings")
+
+
+# API ROUTES
+
+
+@app.route("/api/<token>/get/link/discordid/<discord_id>")
+def api_get_link_by_steam_id(token, discord_id):
+    return db_api.fetch_link_by_discord_id(mongo, token, env["webserver"]["webserver-api-token"], discord_id)
+
+
+@app.route("/api/<token>/get/link/steamid/<steam_id>")
+def api_get_link_by_discord_id(token, steam_id):
+    return db_api.fetch_link_by_steam_id(mongo, token, env["webserver"]["webserver-api-token"], steam_id)
 
 
 if __name__ == "__main__":

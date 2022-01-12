@@ -1,25 +1,26 @@
 {
-    "app": {
-        "app-name": "",
-        "app-role-name": "",
-        "app-id": "",
-        "app-token": "",
-        "app-secret": "",
-        "app-bot-prefix": "!",
-        "app-webhook-url": "",
-        "app-oauth-url": "",
-        "app-scope": "",
-        "app-react-on-webhook": false,
-        "app-get-user-ip": true
-
-    },
-    "webserver": {
-        "webserver-port": 8000,
-        "webserver-host": "",
-        "webserver-uri": "",
-        "webserver-devmode": false
-    },
-    "database": {
-        "database-url": ""
-    }
+	"app": {
+		"app-name": "",
+		"app-role-name": "",
+		"app-id": "",
+		"app-token": "",
+		"app-secret": "",
+		"app-bot-prefix": "!",
+		"app-webhook-url": "",
+		"app-oauth-url": "",
+		"app-redirect-uri": "",
+		"app-scope": "",
+		"app-react-on-webhook": false,
+		"app-get-user-ip": true
+	},
+	"webserver": {
+		"webserver-port": 8000,
+		"webserver-host": "",
+		"webserver-uri": "",
+		"webserver-devmode": false,
+		"webserver-api-token": "CkVOa5ySJYj6VDeewNHVOtG_M19Vo1LTsQJb3wQFvURk6dEcN_js6e3JtTWbzv9_hGwPe290r3Is5t7p1pHqwQ"
+	},
+	"database": {
+		"database-url": ""
+	}
 }
