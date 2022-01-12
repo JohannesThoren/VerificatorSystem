@@ -61,9 +61,10 @@ async def add_user_and_render(mongo, ip):
 
 def get_discord_id(mongo):
     code = request.args.get("code")
-    if code:
+    if code:        
         token = discord_oauth.get_access_token(code)["access_token"]
         user = discord_oauth.get_user(token)
+
 
         session = db_website.fetch_session_by_discord_id(mongo, user["id"])
         link = db_website.fetch_link_by_session(mongo, session)

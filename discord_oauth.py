@@ -11,7 +11,7 @@ SECRET = env["app"]["app-secret"]
 DISCORD_API_BASE_URL = "https://discord.com/api"
 DISCORD_SIGN_IN_URL = env["app"]["app-oauth-url"]
 URI = env["webserver"]["webserver-uri"]
-DISCORD_REDIRECT_URI = f"{URI}/discord"
+DISCORD_REDIRECT_URI = env["app"]["app-redirect-uri"]
 DISCORD_OAUTH_SCOPE = env["app"]["app-scope"]
 DISCORD_TOKEN_URL = "https://discord.com/api/oauth2/token"
 
