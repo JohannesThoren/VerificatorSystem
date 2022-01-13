@@ -1,7 +1,7 @@
 # verificator
 Verificator is a Discord and Steam linker and verifiaction bot and website. It has a Discord bot for handling discord roles and uses a webhook for sending updates. Verificator saves Steam and Discord ids of people using it.
 
-*origianly made for willijum discord community.*
+*origianly made for willjum discord community.*
 
 ## Usecases
 sy that you for example own a Rust or CSGO comunity server and someone does bad stuff in the discord channle, things that are banable, if this person is "verified" or "linked" then you can fetch their Steam id and ban them on the game server.
