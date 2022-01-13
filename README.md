@@ -21,7 +21,7 @@ the setup is very simple, there are alot of steps but they are streight forward.
 
 to start the system you just need to run the `webserver.py` and `bot.py` scripts. and if the `env.json` is correct, the system should be up and running
 
-**Note: install instructions can be wrong if there are updates**
+**Note: install instructions can be wrong if there are updates that changes things, updating instructions when i have time**
 
 ### branding
 it is recommended to edit the `branding.json` file if not you will get errors but the site will still work.
